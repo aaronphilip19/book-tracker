@@ -2,15 +2,17 @@ import { db } from "@/database/db";
 import { books } from "@/schema/books";
 import { eq } from "drizzle-orm";
 import BookForm from "@/components/BookForm";
+import ImportForm from "@/components/ImportForm"; 
 import { toggleReadStatus, deleteBook } from "@/actions/books";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import StatsCard from "@/components/StatsCard";
 
 export default async function Home() {
   const allBooks = await db
     .select()
     .from(books)
-    .where(eq(books.userId, "00000000-0000-0000-0000-000000000000")); // Replace later with session ID
+    .where(eq(books.userId, "00000000-0000-0000-0000-000000000000"));
 
   return (
     <div className="min-h-screen bg-black text-white px-4 py-8 space-y-10">
@@ -18,6 +20,24 @@ export default async function Home() {
 
       <div className="flex justify-center">
         <BookForm />
+      </div>
+
+      <div className="flex justify-center">
+        <StatsCard />
+      </div>
+
+
+      <div className="flex justify-center">
+        <a
+          href="/api/export"
+          className="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition"
+        >
+          ⬇️ Export My Books
+        </a>
+      </div>
+
+      <div className="flex justify-center">
+        <ImportForm />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -37,9 +57,13 @@ export default async function Home() {
                     await toggleReadStatus(book.id, book.isRead ?? false);
                   }}
                 >
-                  <Button variant="outline" size="sm">
-                    Mark as {book.isRead ? "Unread" : "Read"}
-                  </Button>
+                 <Button
+  type="submit"
+  className="text-sm  hover:text-white hover:bg-green-600 transition duration-300"
+>
+  Mark as {book.isRead ? "Unread" : "Read"}
+</Button>
+
                 </form>
 
                 <form

@@ -12,7 +12,7 @@ const BookSchema = z.object({
   rating: z.coerce.number().min(0).max(5).nullish().default(0),
   dateFinished: z.coerce.date().nullish(),
   isRead: z.coerce.boolean().default(false),
-  review: z.string().nullish(), // added a review for reviews later on
+  review: z.string().nullish(), 
 });
 
 export async function createBook(formData: FormData) {
@@ -22,7 +22,7 @@ export async function createBook(formData: FormData) {
     rating: formData.get("rating"),
     dateFinished: formData.get("dateFinished"),
     isRead: formData.get("isRead"),
-    review: formData.get("review"), /// form should get the review input
+    review: formData.get("review"), 
   };
 
   const result = BookSchema.safeParse(raw);
@@ -34,7 +34,7 @@ export async function createBook(formData: FormData) {
   try {
     await db.insert(books).values({
       ...result.data,
-      // No userId required now
+      
       rating: result.data.rating ?? 0,
       isRead: result.data.isRead ?? false,
       userId: "00000000-0000-0000-0000-000000000000", // Placeholder for userId

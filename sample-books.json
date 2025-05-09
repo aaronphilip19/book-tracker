@@ -1,0 +1,24 @@
+[
+    {
+      "title": "The Pragmatic Programmer",
+      "author": "Andrew Hunt",
+      "rating": 5,
+      "isRead": true,
+      "review": "An essential book for all developers.",
+      "dateFinished": "2024-12-15"
+    },
+    {
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "rating": 4,
+      "isRead": false
+    },
+    {
+      "title": "Atomic Habits",
+      "rating": 5,
+      "isRead": true,
+      "review": "Great for productivity.",
+      "dateFinished": "2024-10-01"
+    }
+  ]
+  
