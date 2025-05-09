@@ -9,7 +9,9 @@ export const books = pgTable("books", {
   rating: integer("rating").default(0),
   dateFinished: timestamp("date_finished", { mode: "date" }),
   isRead: boolean("is_read").default(false),
+  review: text("review"),
   userId: uuid("user_id").references(() => users.id), // Removed .notNull()
+
 });
 
 export type NewBook = typeof books.$inferInsert;
